@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
   db.collection('questions').find().toArray((err, result) => {
 
     if (err) return console.log(err)
-    console.log(result)
+    // console.log(result)
     res.render('index.ejs', {
       questions: result
     })
@@ -40,9 +40,8 @@ app.get('/', (req, res) => {
 })
 
 app.post('/questions', (req, res) => {
-  // console.log(req.body.answers)
-  // let answrs=req.body.answers
-  // let answers= answers.push(answrs)
+  console.log(req.body.questions)
+
   db.collection('questions').save({questions: req.body.questions,answers:[]}, (err, result) => {
     if (err) return console.log(err)
     console.log('saved to database')
@@ -54,9 +53,9 @@ app.post('/questions', (req, res) => {
 
 
 app.put('/questions', (req, res) => {
-console.log(req)
+console.log(req.body.answers)
   db.collection('questions')
-    .findOneAndUpdate({questions:"whats the weather tmrw"},
+    .findOneAndUpdate({questions:req.body.questions},
       {
         $push: {
           answers:req.body.answers
@@ -76,6 +75,7 @@ app.delete('/questions', (req, res) => {
   console.log("WTF")
   db.collection('questions').findOneAndDelete({
     questions: req.body.questions,
+    // button:req.body.button,
 
   }, (err, result) => {
     if (err) return res.send(500, err)

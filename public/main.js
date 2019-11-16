@@ -2,7 +2,7 @@ let trash= document.getElementsByClassName('fa fa-trash')
 
 let btn= document.getElementsByClassName('button')
 let addReply=document.getElementsByClassName('addReply')
-let addComment=document.getElementsByClassName('addComment')
+let submitAnswer=document.getElementsByClassName('submitAnswer')
 
 Array.from(addReply).forEach(function(element){
   element.addEventListener('click',function(){
@@ -11,15 +11,18 @@ Array.from(addReply).forEach(function(element){
   });
 });
 
-Array.from(addComment).forEach(function(element){
+Array.from(submitAnswer).forEach(function(element){
   element.addEventListener('click',function(){
     let answers=document.getElementById("userComment").value
     console.log(answers)
+    let questions=this.parentNode.parentNode.childNodes[1].innerText
+    console.log(questions)
     // const questions= document.querySelector(".question")
     fetch('questions',{
       method:'put',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
+  'questions':questions,
   'answers': answers
 })
 })
@@ -44,9 +47,10 @@ Array.from(addComment).forEach(function(element){
 
 Array.from(trash).forEach(function(element) {
         element.addEventListener('click', function(){
-
+console.log("by")
           const questions= this.parentNode.parentNode.childNodes[1].innerText
-          const response=this.parentNode.parentNode.childNodes[3].innerText
+          // const button=this.parentNode.parentNode.childNodes[3]
+          // console.log(button)
           // const comment= this.parentNode.parentNode.childNodes[3].innerText
           fetch('questions', {
             method: 'delete',
@@ -55,6 +59,7 @@ Array.from(trash).forEach(function(element) {
             },
             body: JSON.stringify({
               'questions':questions,
+              // 'button':button,
 
 
               // "comment":span,

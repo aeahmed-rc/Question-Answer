@@ -14,27 +14,27 @@
   <h2>Instructions:Enter your question below.</h2>
   <form class="" action="/questions" method="POST">
     <input type="text" name="questions" placeholder="input question">
-
     <input type="submit" name="" value="Click">
     <%#<h3>how to comment</h3>%>
   </form>
   <ul>
     <% for(var i=0;i < questions.length ;i++){ %>
 
-    <li>
+    <li class="questions">
       <span><%=questions[i].questions%></span>
-      <button class="addReply" type="text" name="button">Add comment</button>
+      <span><%=questions[i].answers%></span>
+
+      <button class="addReply" type="text" name="button">comment</button>
       <span><i class="fa fa-trash" aria-hidden="true"></i></span>
 
     </li>
     <li>
-      <form class="hidden" action="/questions" method="post">
-        <input id="userComment" type="text" name="answers" value="" placeholder="Add your response">
-        <button class="addComment" type="submit" name="button">Submit Answer</button>
-      </form>
+
+        <input  class="hidden" id="userComment" type="text" name="answers" value="" placeholder="Add your response">
+
+        <button class="submitAnswer" type="text" name="button">Submit Answer</button>
     </li>
     <ul>
-      <span><%=questions[i].answers%></span>
 
 
     </ul>
